@@ -1,11 +1,11 @@
-# tf-caf-terratest-common
+# lcaf-component-terratest
 
 [![License](https://img.shields.io/badge/License-Apache_2.0-blue.svg)](https://opensource.org/licenses/Apache-2.0)
 [![License: CC BY-NC-ND 4.0](https://img.shields.io/badge/License-CC_BY--NC--ND_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc-nd/4.0/)
 
 ## Overview
 
-Terratest support utitities and test runners supporting Common Automation Framework (CXAF) terraform modules running automated tests in pipelines.
+Terratest support utitities and test runners supporting Launch Common Automation Framework (LCAF) Terraform modules running automated tests in pipelines.
 
 Goals:
 1. To keep infra test code DRY and composable, reusable functions have been extracted into this dedicated repo which can be included by TF module tests
@@ -226,23 +226,23 @@ go test main_test.go -timeout 1h
 
 To test amendments to the terratest helper before those committed to github, use GoLang "replace". Example
 ```
-module github.com/nexient-llc/tf-aws-module-private_dns_namespace
+module github.com/launchbynttdata/tf-aws-module-private_dns_namespace
 
 go 1.20
 
-replace github.com/nexient-llc/tf-caf-terratest-common => /Home/user/CAF/NOT_CHECKED_IN_YET/tf-caf-terratest-common
+replace github.com/launchbynttdata/lcaf-component-terratest => /Home/user/CAF/NOT_CHECKED_IN_YET/lcaf-component-terratest
 
 require (
-	github.com/nexient-llc/tf-caf-terratest-common v0.0.0-00010101000000-000000000000
+	github.com/launchbynttdata/lcaf-component-terratest v0.0.0-00010101000000-000000000000
 )
 ```
 
 ### GoLang
 
-To use "github.com/nexient-llc" private repository when developing or running GoLang code:
+To use "github.com/launchbynttdata" private repository when developing or running GoLang code:
 
 ```
-go env -w GOPRIVATE='github.com/nexient-llc/'
+go env -w GOPRIVATE='github.com/launchbynttdata/'
 ```
 
 ### Pipeline integration
