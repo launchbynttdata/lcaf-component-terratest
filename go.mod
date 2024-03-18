@@ -1,4 +1,4 @@
-module github.com/nexient-llc/lcaf-component-terratest-common
+module github.com/launchbynttdata/lcaf-component-terratest
 
 go 1.20
 
