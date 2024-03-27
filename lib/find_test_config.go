@@ -7,6 +7,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/launchbynttdata/lcaf-component-terratest/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -34,11 +35,12 @@ func ListAllExamples(t *testing.T, examplesTFFolder string) []string {
 	}
 	return folders
 }
-func IsSkipThisTestRequested(tfFoldr2Test string) bool {
+func IsSkipThisTestRequested(tfFoldr2Test string, testCtx types.TestContext) bool {
+	flags := testCtx.TestSpecificFlags()
 	isTestDisabledCheck := map[string]bool{"false": true, "no": true, "n": true}
 	envVarName := "DSO_INFRA_TEST_SKIP_TEST_" + filepath.Base(tfFoldr2Test)
 	envVar, envVarExists := os.LookupEnv(envVarName)
-	if envVarExists && !isTestDisabledCheck[strings.ToLower(envVar)] {
+	if (envVarExists && !isTestDisabledCheck[strings.ToLower(envVar)]) || (flags[filepath.Base(tfFoldr2Test)] != nil && flags[filepath.Base(tfFoldr2Test)]["SKIP_TEST"]) {
 		fmt.Println("env var " + envVarName + " is set: skipping test for for " + tfFoldr2Test)
 		return true
 	} else {

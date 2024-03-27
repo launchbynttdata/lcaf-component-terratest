@@ -21,7 +21,7 @@ type TestFunc func(t *testing.T, testCtx types.TestContext)
 
 func internalRunSetupTestTeardown(t *testing.T, dir string, testFile string, testCtx types.TestContext, targetInfraReadOnly bool, testFunc ...TestFunc) {
 	// check if test should be skipped
-	if IsSkipThisTestRequested(dir) {
+	if IsSkipThisTestRequested(dir, testCtx) {
 		return
 	}
 	// load config
