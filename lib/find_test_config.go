@@ -40,7 +40,7 @@ func IsSkipThisTestRequested(tfFoldr2Test string, testCtx types.TestContext) boo
 	isTestDisabledCheck := map[string]bool{"false": true, "no": true, "n": true}
 	envVarName := "DSO_INFRA_TEST_SKIP_TEST_" + filepath.Base(tfFoldr2Test)
 	envVar, envVarExists := os.LookupEnv(envVarName)
-	if (envVarExists && !isTestDisabledCheck[strings.ToLower(envVar)]) || (flags[filepath.Base(tfFoldr2Test)] != nil && flags[filepath.Base(tfFoldr2Test)]["SKIP_TEST"]) {
+	if (envVarExists && !isTestDisabledCheck[strings.ToLower(envVar)]) || (flags[testCtx.CurrentTestName()] != nil && flags[testCtx.CurrentTestName()]["SKIP_TEST"]) {
 		fmt.Println("env var " + envVarName + " is set: skipping test for for " + tfFoldr2Test)
 		return true
 	} else {
